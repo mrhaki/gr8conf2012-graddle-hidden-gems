@@ -1,0 +1,5 @@
+Simple text file
+with different lines
+that get's copied by ${gr8Tool.toUpperCase()}.
+
+Created with Gradle ${version}.

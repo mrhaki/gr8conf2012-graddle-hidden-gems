@@ -4,7 +4,17 @@ task copyFiles(type: Copy) {
     from 'src/sample'
     into buildDir
 
-    expand version: gradle.gradleVersion, gr8Tool: 'Gradle'
+    filter { line ->
+        if (line.contains('Gradle')) {
+            line.replace('Gradle', 'GRADLE')
+        } else {
+            line
+        }
+    }
+
+    filter(ReplaceTokens, [version: gradle.gradleVersion])
+
+    expand gr8Tool: 'Gradle'
 
 //    rename 'file.txt', 'file.new'
 //    rename '(.*).txt', '$1.new'
