@@ -1,0 +1,9 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = 'gr8conf.RunJava'
+
+run {
+    jvmArgs '-client'
+    args 'Hello '
+}
