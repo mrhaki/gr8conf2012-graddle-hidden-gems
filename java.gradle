@@ -1,6 +1,13 @@
 apply plugin: 'java'
 
-task runJava(dependsOn: 'classes') << {
+task runJava(type: JavaExec, dependsOn: 'classes') {
+    main = 'gr8conf.RunJava'
+    classpath = sourceSets.main.runtimeClasspath
+
+    args 'Hello all.'
+}
+
+task runJavaFromTask(dependsOn: 'classes') << {
     javaexec {
         main = 'gr8conf.RunJava'
         classpath = sourceSets.main.runtimeClasspath
