@@ -1,0 +1,3 @@
+task createWrapper(type:Wrapper) {
+    gradleVersion = '1.0-rc-2'
+}
