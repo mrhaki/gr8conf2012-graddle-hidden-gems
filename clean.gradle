@@ -1,0 +1,14 @@
+apply plugin: 'base'
+
+version = '1.2'
+
+task helloWorld {
+    def readme = new File('README')
+
+    inputs.property 'version', version
+    outputs.file readme
+
+    doLast {
+        readme.write "README file for Gr8Conf for $version"
+    }
+}
