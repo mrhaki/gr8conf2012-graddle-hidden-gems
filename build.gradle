@@ -25,7 +25,7 @@ ext {
     tasksWithLib = {
         project.tasks.findAll { it.name.startsWith('lib') }
     }
-    customGroup = 'Build'
+    customGroup = 'Gr8Conf Session'
 }
 
 task helloWorld(description: 'Sample description') << {
