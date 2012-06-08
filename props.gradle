@@ -1,0 +1,5 @@
+task showProperties << {
+    println "Showing value for property gr8conf -> $gr8conf"
+}
+
+defaultTasks 'showProperties'
