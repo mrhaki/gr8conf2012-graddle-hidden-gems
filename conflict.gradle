@@ -1,0 +1,8 @@
+apply plugin: 'java'
+
+configurations.all {
+    resolutionStrategy {
+        failOnVersionConflict()
+        force 'org.springframework:spring-core:3.1.RELEASE'
+    }
+}

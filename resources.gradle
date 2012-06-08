@@ -1,0 +1,15 @@
+apply plugin: 'java'
+
+ext {
+    processResourceTasks= {
+        sourceSets*.processResourcesTaskName.collect { tasks[it] }
+    }
+}
+
+afterEvaluate {
+    configure(processResourceTasks()) {
+        expand version: '1.0'
+    }
+}
+
+
