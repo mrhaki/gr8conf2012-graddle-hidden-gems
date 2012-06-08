@@ -1,0 +1,68 @@
+apply {
+    plugin 'java'
+}
+
+version = new Version(major: 2, minor: 1, release: 'beta')
+
+description = """
+Sample project for Gr8conf 2012
+Gradle version used: $gradle.gradleVersion
+Project version: $version
+Project name: $name
+"""
+
+class Version {
+    int major, minor
+    String release
+
+    String toString() {
+        "$major.$minor-$release"
+    }
+}
+
+ext {
+    customPropertyValue = 'value of custom property'
+    tasksWithLib = {
+        project.tasks.findAll { it.name.startsWith('lib') }
+    }
+    customGroup = 'Build'
+}
+
+task helloWorld(description: 'Sample description') << {
+    println customPropertyValue
+}
+helloWorld.dependsOn tasksWithLib
+helloWorld.group customGroup
+
+
+5.times {
+    task "lib${it}" << {
+        println "Running ${it.name} task"
+    }
+}
+
+afterEvaluate {
+    configure(tasksWithLib()) {
+        description = "Task name $it.name as a sample"
+        group = customGroup
+    }
+}
+
+tasks.addRule("Pattern: desc<TaskName>") { taskName ->
+    def realTaskName = taskName - 'desc'
+    def realTask = project.tasks.find { it.name == realTaskName[0].toLowerCase() + realTaskName[1..-1] }
+    if (realTask) {
+        task(taskName) << {
+            println "Showing description of $realTaskName"
+            println realTask.description
+        }
+    }
+}
+
+defaultTasks 'tasks'
+
+class Custom {
+    String version
+
+    String toString() { version }
+}

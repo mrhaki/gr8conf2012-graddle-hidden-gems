@@ -1,0 +1,10 @@
+apply plugin: 'java'
+
+task runJava(dependsOn: 'classes') << {
+    javaexec {
+        main = 'gr8conf.RunJava'
+        classpath = sourceSets.main.runtimeClasspath
+
+        args 'Hello all.'
+    }
+}

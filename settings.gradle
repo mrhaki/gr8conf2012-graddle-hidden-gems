@@ -1,0 +1,4 @@
+rootProject.name = 'Gr8Conf'
+if (startParameter.buildFile) {
+    rootProject.buildFileName = startParameter.buildFile.name
+}

@@ -1,0 +1,45 @@
+apply {
+    plugin 'java'
+}
+
+description = """
+Sample project for Gr8conf 2012
+Gradle version used: $gradle.gradleVersion
+Project name: $name
+"""
+
+ext {
+    customPropertyValue = 'value of custom property'
+    tasksWithLib = {
+        project.tasks.findAll { it.name.startsWith('lib') }
+    }
+    customGroup = 'Build'
+}
+
+task helloWorld << {
+    println customPropertyValue
+}
+helloWorld.dependsOn tasksWithLib
+helloWorld.group customGroup
+
+
+5.times {
+    task "lib${it}" << {
+        println "Running ${it.name} task"
+    }
+}
+
+afterEvaluate {
+    configure(tasksWithLib()) {
+        description = "Task name $it.name as a sample"
+        group = customGroup
+    }
+}
+
+defaultTasks 'tasks'
+
+class Custom {
+    String version
+
+    String toString() { version }
+}
